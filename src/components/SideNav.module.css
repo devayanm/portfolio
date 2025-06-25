@@ -1,0 +1,60 @@
+.sideNavContainer {
+    position: fixed;
+    top: 50%;
+    left: 32px;
+    transform: translateY(-50%);
+    z-index: 1050;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 2rem;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.09);
+    padding: 1.2rem 0.7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.navIcon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    border-radius: 50%;
+    color: #495057;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+    font-size: 1.4rem;
+    border: none;
+    outline: none;
+}
+
+.navIconActive {
+    background: #0d6efd;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.15);
+}
+
+@media (max-width: 991px) {
+    .sideNavContainer {
+        top: unset;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row;
+        border-radius: 2rem;
+        padding: 0.7rem 1.2rem;
+        width: fit-content;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.11);
+    }
+
+    .navIcon {
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+    }
+
+    .navIcon:last-child {
+        margin-right: 0;
+    }
+}

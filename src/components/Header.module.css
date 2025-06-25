@@ -1,0 +1,43 @@
+.brand {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: #0d6efd !important;
+    transition: color 0.2s;
+}
+
+.brand:hover {
+    color: #0a58ca !important;
+    text-decoration: none;
+}
+
+.navLink {
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    color: #333 !important;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+}
+
+.navLink:hover,
+.navLink.active {
+    color: #0d6efd !important;
+    border-bottom: 2px solid #0d6efd;
+    background: none !important;
+}
+
+@media (max-width: 991px) {
+    .brand {
+        font-size: 1.3rem;
+    }
+
+    .navLink {
+        font-size: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+    }
+}

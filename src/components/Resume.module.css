@@ -1,0 +1,262 @@
+:root {
+    --sidebar-space: 100px;
+    --primary: #0d6efd;
+    --text: #0d1b2a;
+    --muted: #555;
+    --bg: #f5f9ff;
+    --card: #ffffff;
+    --radius: 1rem;
+    --shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+}
+
+.resumeSection {
+    background: var(--bg);
+    padding: 5rem 2rem;
+    padding-left: calc(var(--sidebar-space) + 2rem);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.heading {
+    font-size: 2.5rem;
+    color: var(--text);
+}
+
+.downloadBtn,
+.previewBtn {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+.downloadBtn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+}
+
+.downloadBtn:hover {
+    background: #084cdf;
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(13, 110, 253, 0.2);
+}
+
+.previewBtn {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.previewBtn:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.title {
+    font-size: 1rem;
+    color: var(--muted);
+    margin: 0.6rem auto 0;
+    max-width: 600px;
+}
+
+.contact {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+}
+
+.leftCol,
+.rightCol {
+    flex: 1;
+    min-width: 300px;
+}
+
+.sectionTitle {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    color: var(--text);
+    border-left: 4px solid var(--primary);
+    padding-left: 0.7rem;
+}
+
+.companyBlock {
+    background: var(--card);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.companyName {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.roleEntry {
+    margin-bottom: 1.2rem;
+}
+
+.roleHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+}
+
+.roleEntry p {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.educationList {
+    list-style: none;
+    padding: 0;
+}
+
+.educationList li {
+    background: var(--card);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.educationList p {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+/* === Modal Styling === */
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modalContent {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 1rem;
+    backdrop-filter: blur(16px);
+    overflow: hidden;
+    max-width: 960px;
+    width: 100%;
+    max-height: 90vh;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    animation: scaleIn 0.3s ease-out;
+}
+
+.resumeIframe {
+    width: 100%;
+    height: 80vh;
+    border: none;
+}
+
+.modalClose {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 2rem;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    font-weight: bold;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* === Responsive === */
+@media (max-width: 991px) {
+    .resumeSection {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .grid {
+        flex-direction: column;
+    }
+
+    .contact {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modalContent {
+        max-width: 95%;
+    }
+
+    .resumeIframe {
+        height: 65vh;
+    }
+}

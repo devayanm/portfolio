@@ -50,7 +50,7 @@ my-portfolio/
 ├── vite.config.js
 └── README.md
 
-````
+```
 
 ---
 
@@ -72,7 +72,7 @@ my-portfolio/
 ```bash
 git clone https://github.com/devayanm/portfolio.git
 cd portfolio
-````
+```
 
 ### 2. Install Dependencies
 
@@ -100,9 +100,9 @@ npm run build
 
 This portfolio supports **PWA** with:
 
-* Offline access
-* Add to Home screen
-* Custom splash screen and icon set
+- Offline access
+- Add to Home screen
+- Custom splash screen and icon set
 
 > Ensure all icons and `manifest.webmanifest` are placed correctly under `/public` and configured via `vite.config.js`.
 
@@ -112,10 +112,10 @@ This portfolio supports **PWA** with:
 
 Optimized using `react-helmet-async` with:
 
-* Page title, description, author
-* Open Graph for social sharing
-* Google site verification
-* Robots directives for crawlers
+- Page title, description, author
+- Open Graph for social sharing
+- Google site verification
+- Robots directives for crawlers
 
 ---
 
@@ -133,20 +133,23 @@ The **Contact** form is powered by **EmailJS**. Configure your EmailJS credentia
 
 ## 🙏 Acknowledgements
 
-* Icons by [React Icons](https://react-icons.github.io)
-* Hosting via [Vercel](https://vercel.com/)
-* Animation via [Framer Motion](https://www.framer.com/motion/)
-* Email form via [EmailJS](https://www.emailjs.com/)
-* Favicons via [Favicon.io](https://favicon.io)
+- Icons by [React Icons](https://react-icons.github.io)
+- Hosting via [Vercel](https://vercel.com/)
+- Animation via [Framer Motion](https://www.framer.com/motion/)
+- Email form via [EmailJS](https://www.emailjs.com/)
+- Favicons via [Favicon.io](https://favicon.io)
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the **Devayan Attribution-Only License** — free to use with credit.  
+© 2025 [Devayan Mandal](https://github.com/devayanm)
 
 ---
 
 Made with ❤️ by **Devayan Mandal**
+
+```
 
 ```

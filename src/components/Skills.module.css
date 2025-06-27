@@ -1,23 +1,28 @@
 :root {
-    --sidebar-space: 100px;
+    --sidebar-space: 84px;
 }
 
 .skillsSection {
-    background: linear-gradient(135deg, #f6f9ff, #e9f0ff);
     padding: 5rem 2rem;
     padding-left: calc(var(--sidebar-space) + 2rem);
+    background: linear-gradient(135deg, #f5faff, #eaf4ff);
     min-height: 100vh;
+    position: relative;
+    z-index: 1;
 }
 
 .heading {
-    font-size: 2.3rem;
+    font-size: 2.6rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: 700;
     color: #0d1b2a;
 }
 
 .skillWrapper {
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.7s ease;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
 }
 
 .skillWrapper.show {
@@ -26,92 +31,160 @@
 }
 
 .categoryGroup {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 
 .categoryTitle {
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
     color: #0d6efd;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    position: relative;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #0d6efd;
+    padding-left: 0.8rem;
+    letter-spacing: 0.3px;
 }
 
-.cardRow {
+.cardGrid {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 2rem;
+    justify-content: flex-start;
 }
 
 .skillCard {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 1rem;
-    box-shadow: 0 6px 24px rgba(13, 110, 253, 0.07);
-    padding: 1.2rem 1rem;
-    min-width: 220px;
-    flex: 1 1 220px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skillCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 32px rgba(13, 110, 253, 0.12);
-}
-
-.skillTop {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(16px);
+    border-radius: 1.5rem;
+    padding: 1.5rem 1rem;
+    width: 160px;
+    box-shadow: 0 12px 32px rgba(13, 110, 253, 0.1);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.8rem;
-}
-
-.skillIcon {
-    font-size: 1.5rem;
-    color: #0d6efd;
-    margin-right: 0.5rem;
-}
-
-.skillName {
-    font-weight: 600;
-    font-size: 1rem;
-    flex: 1;
-    color: #0d1b2a;
-}
-
-.levelText {
-    font-size: 0.95rem;
-    color: #495057;
-    font-weight: 500;
-}
-
-.progressBar {
-    height: 8px;
-    background: #dee2e6;
-    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
     overflow: hidden;
 }
 
-.progressFill {
+.skillCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(13, 110, 253, 0.2);
+}
+
+.circularProgress {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.circularSvg {
+    width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #0d6efd, #0ff);
-    border-radius: 20px;
-    transition: width 0.6s ease-out;
+    transform: rotate(-90deg);
+}
+
+.bg {
+    fill: none;
+    stroke: #e2e8f0;
+    stroke-width: 3;
+}
+
+.progress {
+    fill: none;
+    stroke: #0d6efd;
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.4s ease-in-out;
+}
+
+.innerIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem;
+    color: #0d6efd;
+}
+
+.skillName {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0d1b2a;
+    margin-bottom: 0.3rem;
+}
+
+.levelText {
+    font-size: 0.9rem;
+    color: #495057;
 }
 
 @media (max-width: 991px) {
     .skillsSection {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 
     .heading {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
 
-    .cardRow {
-        flex-direction: column;
-        align-items: stretch;
+    .cardGrid {
+        justify-content: center;
+    }
+
+    .skillCard {
+        width: 140px;
+    }
+
+    .circularProgress {
+        width: 70px;
+        height: 70px;
+    }
+
+    .innerIcon {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cardGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+    }
+
+    .skillCard {
+        width: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+    }
+
+    .skillCard {
+        width: 130px;
+        padding: 1.2rem 0.8rem;
+    }
+
+    .circularProgress {
+        width: 60px;
+        height: 60px;
+    }
+
+    .innerIcon {
+        font-size: 1.3rem;
+    }
+
+    .skillName {
+        font-size: 0.95rem;
+    }
+
+    .levelText {
+        font-size: 0.85rem;
     }
 }

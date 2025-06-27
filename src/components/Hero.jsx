@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import styles from "./Hero.module.css";
 import profile from "../assets/profile.jpg";
+import { Rocket, MessageCircle, Sparkles } from "lucide-react";
 
 const roles = [
     "Full Stack Developer",
@@ -47,38 +48,47 @@ export default function Hero() {
 
     return (
         <section id="hero" className={styles.hero}>
-            <div className={styles.heroLeft}>
-                <h1 className={styles.name}>Hey, I'm Devayan 👋</h1>
-                <h2 className={styles.role}>
-                    <span ref={subtitleRef}></span>
-                    <span className={styles.cursor}>|</span>
-                </h2>
-                <p className={styles.description}>
-                    I build modern web experiences with precision and passion.
-                </p>
-                <div className={styles.buttons}>
-                    <a href="#projects" className={styles.primaryBtn}>
-                        View Projects
-                    </a>
-                    <a href="#contact" className={styles.secondaryBtn}>
-                        Let’s Talk
-                    </a>
+            <div className={styles.heroContent}>
+                <div className={styles.heroLeft}>
+                    <div className={styles.greeting}>
+                        <Sparkles size={20} className={styles.greetIcon} />
+                        <span>Hello there</span>
+                    </div>
+                    <h1 className={styles.name}>I'm <span>Devayan Mandal</span></h1>
+                    <h2 className={styles.role}>
+                        <span ref={subtitleRef}></span>
+                        <span className={styles.cursor}>|</span>
+                    </h2>
+                    <p className={styles.description}>
+                        I craft seamless, engaging, and responsive digital experiences using cutting-edge technologies. Passionate about building products that make a difference.
+                    </p>
+                    <div className={styles.buttons}>
+                        <a href="#projects" className={styles.primaryBtn}>
+                            <Rocket size={18} className={styles.icon} />
+                            View Projects
+                        </a>
+                        <a href="#contact" className={styles.secondaryBtn}>
+                            <MessageCircle size={18} className={styles.icon} />
+                            Let’s Talk
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <div className={styles.heroRight}>
-                <div className={styles.profileCard}>
-                    <img src={profile} alt="Devayan Mandal" className={styles.profileImage} />
+                <div className={styles.heroRight}>
+                    <div className={styles.profileWrapper}>
+                        <img src={profile} alt="Devayan Mandal" className={styles.profileImage} />
+                        <div className={styles.glow}></div>
+                    </div>
+                    <svg className={styles.bgTriangle} viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="150,20 280,280 20,280" fill="url(#gradient)" />
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stopColor="#0ff" stopOpacity="0.4" />
+                                <stop offset="100%" stopColor="#0d6efd" stopOpacity="0.3" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
-                <svg className={styles.bgTriangle} viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="150,20 280,280 20,280" fill="url(#gradient)" />
-                    <defs>
-                        <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stopColor="#0ff" stopOpacity="0.4" />
-                            <stop offset="100%" stopColor="#0d6efd" stopOpacity="0.3" />
-                        </linearGradient>
-                    </defs>
-                </svg>
             </div>
         </section>
     );

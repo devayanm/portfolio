@@ -1,6 +1,13 @@
 import styles from './SideNav.module.css';
 import { useState, useEffect } from 'react';
-import { House, Person, BarChart, Briefcase, Collection, Envelope } from 'react-bootstrap-icons';
+import {
+    House,
+    Person,
+    BarChart,
+    Briefcase,
+    Collection,
+    Envelope
+} from 'react-bootstrap-icons';
 
 const navItems = [
     { id: 'hero', label: 'Home', icon: <House /> },
@@ -30,16 +37,16 @@ export default function SideNav() {
     }, []);
 
     return (
-        <nav className={styles.sideNavContainer} aria-label="Section navigation">
+        <nav className={styles.sideNavContainer} aria-label="Sidebar Navigation">
             {navItems.map(item => (
                 <a
                     key={item.id}
                     href={`#${item.id}`}
                     className={`${styles.navIcon} ${active === item.id ? styles.navIconActive : ''}`}
                     aria-label={item.label}
-                    title={item.label}
                 >
-                    {item.icon}
+                    <span className={styles.icon}>{item.icon}</span>
+                    <span className={styles.label}>{item.label}</span>
                 </a>
             ))}
         </nav>

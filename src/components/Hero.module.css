@@ -1,42 +1,85 @@
 :root {
     --sidebar-width: 84px;
-    /* 44px icon + ~40px padding */
 }
 
 .hero {
+    padding: 6rem 3rem;
+    padding-left: calc(var(--sidebar-width) + 3rem);
+    background: linear-gradient(135deg, #f6fbff 0%, #edf5ff 100%);
+    overflow: hidden;
+}
+
+.heroContent {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6rem 3rem;
-    padding-left: calc(var(--sidebar-width) + 3rem);
-    /* Sidebar space */
-    background: linear-gradient(135deg, #f6fbff 0%, #edf5ff 100%);
-    overflow: hidden;
+    gap: 4rem;
     flex-wrap: wrap;
+    animation: fadeSlideIn 1s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .heroLeft {
     flex: 1;
-    min-width: 300px;
+    min-width: 280px;
     z-index: 2;
 }
 
+.greeting {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+    gap: 0.5rem;
+    animation: pulseGlow 1.5s infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
 .name {
-    font-size: 3rem;
-    font-weight: 700;
+    font-size: 3.5rem;
+    font-weight: 800;
     color: #0d1b2a;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.name span {
+    background: linear-gradient(to right, #007cf0, #00dfd8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .role {
     font-size: 1.5rem;
     font-weight: 600;
     color: #0077b6;
-    min-height: 48px;
     display: flex;
     align-items: center;
-    gap: 4px;
-    margin-bottom: 1rem;
+    gap: 6px;
+    height: 48px;
+    margin-bottom: 1.2rem;
 }
 
 .cursor {
@@ -60,39 +103,46 @@
 .description {
     color: #495057;
     font-size: 1.1rem;
+    line-height: 1.6;
     margin-bottom: 2rem;
-    max-width: 500px;
+    max-width: 540px;
 }
 
 .buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
-.primaryBtn {
-    background-color: #0d6efd;
-    color: #fff;
-    padding: 0.6rem 1.6rem;
-    border-radius: 30px;
-    font-weight: 500;
+.primaryBtn,
+.secondaryBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    border-radius: 32px;
+    font-weight: 600;
+    font-size: 1rem;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
+.primaryBtn {
+    background-color: #0d6efd;
+    color: white;
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}
+
 .primaryBtn:hover {
-    background-color: #084298;
+    background-color: #0954c6;
     transform: translateY(-2px);
 }
 
 .secondaryBtn {
     border: 2px solid #0d6efd;
     color: #0d6efd;
-    padding: 0.6rem 1.6rem;
-    border-radius: 30px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s ease;
+    background-color: white;
 }
 
 .secondaryBtn:hover {
@@ -100,16 +150,23 @@
     transform: translateY(-2px);
 }
 
+.icon {
+    margin-right: 0.3rem;
+}
+
+.greetIcon {
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
 .heroRight {
-    flex: 0 0 360px;
     position: relative;
+    flex: 0 0 360px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
 }
 
-.profileCard {
+.profileWrapper {
     position: relative;
     z-index: 2;
     background: rgba(255, 255, 255, 0.55);
@@ -120,7 +177,7 @@
     transition: transform 0.3s ease;
 }
 
-.profileCard:hover {
+.profileWrapper:hover {
     transform: scale(1.05) rotate(-2deg);
 }
 
@@ -132,30 +189,92 @@
     border: 5px solid #fff;
 }
 
+.glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(13, 110, 253, 0.3), transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
 .bgTriangle {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 320px;
-    height: 320px;
-    transform: translate(-50%, -50%) rotate(-5deg);
+    width: 340px;
+    height: 340px;
+    transform: translate(-50%, -50%) rotate(-6deg);
     z-index: 1;
 }
 
 @media (max-width: 991px) {
     .hero {
-        flex-direction: column;
         padding: 4rem 2rem;
         padding-left: 2rem;
-        /* Remove sidebar spacing on small screens */
         text-align: center;
     }
 
-    .heroRight {
-        margin-top: 3rem;
+    .heroContent {
+        flex-direction: column-reverse;
+        align-items: center;
     }
 
     .buttons {
         justify-content: center;
+    }
+
+    .description {
+        margin: 0 auto 2rem;
+    }
+
+    .heroRight {
+        margin-top: 2.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .name {
+        font-size: 2.5rem;
+    }
+
+    .role {
+        font-size: 1.25rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .profileImage {
+        width: 180px;
+        height: 180px;
+    }
+
+    .glow {
+        width: 200px;
+        height: 200px;
+    }
+
+    .bgTriangle {
+        width: 260px;
+        height: 260px;
+    }
+}
+
+@media (max-width: 400px) {
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .primaryBtn,
+    .secondaryBtn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
     }
 }

@@ -1,15 +1,16 @@
 import React from 'react';
 import styles from './About.module.css';
-import profile from '../assets/profile.jpg';
+import profile from '../assets/profile1.jpg';
 import {
-    FaBriefcase,
-    FaProjectDiagram,
-    FaDatabase,
-    FaReact,
-    FaNodeJs,
-    FaLock,
-    FaGitAlt
-} from 'react-icons/fa';
+    Briefcase,
+    Layers3,
+    ShieldCheck,
+    Code2,
+    Rocket,
+    GitBranch,
+    Server,
+    Settings2
+} from 'lucide-react';
 import { SiMongodb, SiSolidity, SiLinux, SiDocker } from 'react-icons/si';
 
 export default function About() {
@@ -29,12 +30,12 @@ export default function About() {
         <section id="about" className={styles.aboutSection}>
             <div className={styles.container}>
 
-                {/* Left: Profile Card */}
+                {/* Profile Overview */}
                 <div className={styles.profileCard}>
                     <div className={styles.glow}></div>
                     <img src={profile} alt="Devayan Mandal" className={styles.avatar} />
                     <h4 className={styles.name}>Devayan Mandal</h4>
-                    <p className={styles.role}>Full Stack Developer & Blockchain Enthusiast</p>
+                    <p className={styles.role}>Full Stack & Blockchain Developer</p>
                     <div className={styles.stats}>
                         <div><span className={styles.statNumber}>10+</span><span className={styles.statLabel}>Projects</span></div>
                         <div><span className={styles.statNumber}>2</span><span className={styles.statLabel}>Internships</span></div>
@@ -42,15 +43,15 @@ export default function About() {
                     </div>
                 </div>
 
-                {/* Right: Journey and Badges */}
+                {/* Career Timeline */}
                 <div className={styles.textArea}>
-                    <h2 className={styles.heading}>Professional Journey</h2>
+                    <h2 className={styles.heading}>My Journey</h2>
                     <p className={styles.intro}>
-                        A passionate developer crafting real-world solutions at scale — from startups to blockchain-based systems.
+                        Turning ideas into impact through full-stack development, open-source contributions, and blockchain innovations.
                     </p>
 
                     <div className={styles.timelineGroup}>
-                        <h4 className={styles.subheading}><FaBriefcase className={styles.icon} /> Roles & Internships</h4>
+                        <h4 className={styles.subheading}><Briefcase className={styles.icon} /> Roles & Internships</h4>
                         {roles.map((item, i) => (
                             <div key={i} className={styles.timelineItem}>
                                 <span className={styles.timelineDot}></span>
@@ -63,7 +64,7 @@ export default function About() {
                     </div>
 
                     <div className={styles.timelineGroup}>
-                        <h4 className={styles.subheading}><FaProjectDiagram className={styles.icon} /> Projects & Achievements</h4>
+                        <h4 className={styles.subheading}><Rocket className={styles.icon} /> Projects & Highlights</h4>
                         {projects.map((item, i) => (
                             <div key={i} className={styles.timelineItem}>
                                 <span className={styles.timelineDot}></span>
@@ -76,14 +77,15 @@ export default function About() {
                     </div>
 
                     <div className={styles.badgeRow}>
-                        <span className={styles.techBadge}><FaReact /> React</span>
-                        <span className={styles.techBadge}><FaNodeJs /> Node.js</span>
-                        <span className={styles.techBadge}><SiMongodb /> MongoDB</span>
-                        <span className={styles.techBadge}><SiSolidity /> Solidity</span>
-                        <span className={styles.techBadge}><FaLock /> Cybersecurity</span>
-                        <span className={styles.techBadge}><FaGitAlt /> Git & GitHub</span>
-                        <span className={styles.techBadge}><SiDocker /> Docker</span>
-                        <span className={styles.techBadge}><SiLinux /> Linux</span>
+                        <span className={styles.techBadge}><Code2 size={16} /> React</span>
+                        <span className={styles.techBadge}><Server size={16} /> Node.js</span>
+                        <span className={styles.techBadge}><SiMongodb size={16} /> MongoDB</span>
+                        <span className={styles.techBadge}><SiSolidity size={16} /> Solidity</span>
+                        <span className={styles.techBadge}><ShieldCheck size={16} /> Cybersecurity</span>
+                        <span className={styles.techBadge}><GitBranch size={16} /> Git & GitHub</span>
+                        <span className={styles.techBadge}><SiDocker size={16} /> Docker</span>
+                        <span className={styles.techBadge}><SiLinux size={16} /> Linux</span>
+                        <span className={styles.techBadge}><Settings2 size={16} /> DevOps</span>
                     </div>
                 </div>
             </div>

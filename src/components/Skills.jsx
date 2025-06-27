@@ -1,30 +1,13 @@
 // src/components/Skills.jsx
-import styles from './Skills.module.css';
 import { useEffect, useRef } from 'react';
+import styles from './Skills.module.css';
+
 import {
-    SiJavascript,
-    SiCplusplus,
-    SiPython,
-    SiRust,
-    SiReact,
-    SiRedux,
-    SiVuedotjs,
-    SiNextdotjs,
-    SiNodedotjs,
-    SiExpress,
-    SiBootstrap,
-    SiTailwindcss,
-    SiMui,
-    SiDocker,
-    SiLinux,
-    SiGit,
-    SiGithub,
-    SiVite,
-    SiNpm,
-    SiMongodb,
-    SiMysql,
-    SiPostgresql,
-    SiRedis
+    SiJavascript, SiCplusplus, SiPython, SiRust,
+    SiReact, SiRedux, SiVuedotjs, SiNextdotjs,
+    SiNodedotjs, SiExpress, SiBootstrap, SiTailwindcss, SiMui,
+    SiDocker, SiLinux, SiGit, SiGithub, SiVite, SiNpm,
+    SiMongodb, SiMysql, SiPostgresql, SiRedis
 } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 
@@ -32,13 +15,21 @@ export default function Skills() {
     const sectionRef = useRef(null);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                sectionRef.current.classList.add(styles.show);
-            }
-        }, { threshold: 0.2 });
+        const el = sectionRef.current;
+        if (!el) return;
 
-        observer.observe(sectionRef.current);
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    el.classList.add(styles.show);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
     }, []);
 
     const skills = [
@@ -90,32 +81,45 @@ export default function Skills() {
 
     return (
         <section id="skills" className={styles.skillsSection}>
-            <div className="container">
-                <h2 className={`text-center fw-bold mb-5 ${styles.heading}`}>My Tech Stack</h2>
-                <div className={styles.skillWrapper} ref={sectionRef}>
-                    {skills.map((group, idx) => (
-                        <div key={idx} className={styles.categoryGroup}>
-                            <h5 className={styles.categoryTitle}>{group.category}</h5>
-                            <div className={styles.cardRow}>
-                                {group.items.map((skill, index) => (
-                                    <div key={index} className={styles.skillCard}>
-                                        <div className={styles.skillTop}>
-                                            <div className={styles.skillIcon}>{skill.icon}</div>
-                                            <div className={styles.skillName}>{skill.name}</div>
-                                            <div className={styles.levelText}>{skill.level}%</div>
-                                        </div>
-                                        <div className={styles.progressBar}>
-                                            <div
-                                                className={styles.progressFill}
-                                                style={{ width: `${skill.level}%` }}
+            <h2 className={styles.heading}>My Tech Stack</h2>
+            <div className={styles.skillWrapper} ref={sectionRef}>
+                {skills.map((group, i) => (
+                    <div key={i} className={styles.categoryGroup}>
+                        <h3 className={styles.categoryTitle}>{group.category}</h3>
+                        <div className={styles.cardGrid}>
+                            {group.items.map((skill, index) => (
+                                <div
+                                    key={index}
+                                    className={styles.skillCard}
+                                    style={{ '--level': skill.level }}
+                                >
+                                    <div className={styles.circularProgress}>
+                                        <svg viewBox="0 0 36 36" className={styles.circularSvg}>
+                                            <path
+                                                className={styles.bg}
+                                                d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831"
                                             />
+                                            <path
+                                                className={styles.progress}
+                                                strokeDasharray={`${skill.level}, 100`}
+                                                d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                        </svg>
+                                        <div className={styles.innerIcon}>
+                                            {skill.icon}
                                         </div>
                                     </div>
-                                ))}
-                            </div>
+                                    <p className={styles.skillName}>{skill.name}</p>
+                                    <p className={styles.levelText}>{skill.level}%</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
         </section>
     );

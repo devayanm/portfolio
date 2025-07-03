@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/Resume_Devayan_Mandal.pdf",
+            "destination": "/Resume_Devayan_Mandal.pdf"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}

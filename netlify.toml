@@ -1,3 +1,13 @@
 [build]
   command = "npm install --legacy-peer-deps --force && npm run build"
   publish = "dist"
+
+[[redirects]]
+  from = "/Resume_Devayan_Mandal.pdf"
+  to = "/Resume_Devayan_Mandal.pdf"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

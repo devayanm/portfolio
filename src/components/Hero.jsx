@@ -30,22 +30,22 @@ const roles = [
 
 const socials = [
     {
-        href: "https://github.com/yourusername",
+        href: "https://github.com/devayanm",
         label: "GitHub",
         icon: <FaGithub />,
     },
     {
-        href: "https://linkedin.com/in/yourusername",
+        href: "https://linkedin.com/in/devayan-mandal",
         label: "LinkedIn",
         icon: <FaLinkedin />,
     },
     {
-        href: "https://twitter.com/yourusername",
+        href: "https://twitter.com/devayan45",
         label: "Twitter",
         icon: <FaTwitter />,
     },
     {
-        href: "https://instagram.com/yourusername",
+        href: "https://instagram.com/iamdevayan",
         label: "Instagram",
         icon: <FaInstagram />,
     },

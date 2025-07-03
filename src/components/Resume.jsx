@@ -5,14 +5,14 @@ import {
     FaGraduationCap, FaUserFriends, FaLinkedin, FaGithub, FaGlobe
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import resume from '../assets/Resume_Devayan_Mandal.pdf';
+import resume from '/Resume_Devayan_Mandal.pdf';
 import { ClipLoader } from 'react-spinners';
 
 // === DYNAMIC DATA ===
 const CONTACTS = [
     { icon: <FaMapMarkerAlt />, text: "Kolkata, IN" },
     { icon: <FaEnvelope />, text: "devayan9689@gmail.com", link: "mailto:devayan9689@gmail.com" },
-    { icon: <FaLinkedin />, text: "LinkedIn", link: "https://linkedin.com/in/devayanm" },
+    { icon: <FaLinkedin />, text: "LinkedIn", link: "https://linkedin.com/in/devayan-mandal" },
     { icon: <FaGithub />, text: "GitHub", link: "https://github.com/devayanm" },
     { icon: <FaGlobe />, text: "Portfolio", link: "https://devayan.vercel.app" }
 ];

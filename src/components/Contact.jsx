@@ -7,11 +7,11 @@ import avatar from '../assets/profile.jpg';
 import { send } from '@emailjs/browser';
 
 const SOCIALS = [
-    { icon: "mdi:linkedin", label: "LinkedIn", link: "https://linkedin.com/in/devayanm" },
+    { icon: "mdi:linkedin", label: "LinkedIn", link: "https://linkedin.com/in/devayan-mandal" },
     { icon: "mdi:github", label: "GitHub", link: "https://github.com/devayanm" },
     { icon: "mdi:whatsapp", label: "WhatsApp", link: "https://wa.me/91XXXXXXXXXX" },
     { icon: "mdi:telegram", label: "Telegram", link: "https://t.me/devayan" },
-    { icon: "mdi:email", label: "Email", link: "mailto:devayanmandal@gmail.com" },
+    { icon: "mdi:email", label: "Email", link: "mailto:devayan9689@gmail.com" },
 ];
 
 export default function Contact() {

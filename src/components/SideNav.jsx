@@ -1,5 +1,5 @@
 import styles from './SideNav.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
     House,
     Person,
@@ -22,6 +22,7 @@ const navItems = [
 
 export default function SideNav() {
     const [active, setActive] = useState('hero');
+    const navRefs = useRef([]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -38,18 +39,46 @@ export default function SideNav() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Smooth scroll with offset (adjust offset as needed)
+    const scrollToSection = (id) => {
+        const el = document.getElementById(id);
+        if (el) {
+            const yOffset = -80; // offset for fixed header height
+            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    };
+
+    // Keyboard navigation (Arrow keys)
+    const handleKeyDown = (e, idx, id) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+            e.preventDefault();
+            navRefs.current[(idx + 1) % navItems.length]?.focus();
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            navRefs.current[(idx - 1 + navItems.length) % navItems.length]?.focus();
+        } else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToSection(id);
+        }
+    };
+
     return (
         <nav className={styles.sideNavContainer} aria-label="Sidebar Navigation">
-            {navItems.map(item => (
-                <a
+            {navItems.map((item, idx) => (
+                <button
                     key={item.id}
-                    href={`#${item.id}`}
+                    ref={el => navRefs.current[idx] = el}
                     className={`${styles.navIcon} ${active === item.id ? styles.navIconActive : ''}`}
                     aria-label={item.label}
+                    aria-current={active === item.id ? 'page' : undefined}
+                    onClick={() => scrollToSection(item.id)}
+                    onKeyDown={(e) => handleKeyDown(e, idx, item.id)}
+                    type="button"
                 >
                     <span className={styles.icon}>{item.icon}</span>
                     <span className={styles.label}>{item.label}</span>
-                </a>
+                </button>
             ))}
         </nav>
     );

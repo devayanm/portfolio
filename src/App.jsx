@@ -1,4 +1,3 @@
-// App.jsx
 import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -16,6 +15,12 @@ import Contact from './components/Contact';
 
 function App() {
   useEffect(() => {
+    // Always start at the top on first load
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // PWA update prompt
     const updateSW = registerSW({
       onNeedRefresh() {
@@ -39,10 +44,7 @@ function App() {
         />
         <meta name="author" content="Devayan Mandal" />
         <meta name="robots" content="index,follow" />
-        <meta
-          property="og:title"
-          content="Devayan Portfolio"
-        />
+        <meta property="og:title" content="Devayan Portfolio" />
         <meta
           property="og:description"
           content="Welcome to my profile! Let's connect and collaborate on meaningful tech projects."

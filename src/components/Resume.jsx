@@ -5,7 +5,7 @@ import {
     FaGraduationCap, FaUserFriends, FaLinkedin, FaGithub, FaGlobe
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import resume from '/Resume_Devayan_Mandal.pdf';
+const resume = '/Resume_Devayan_Mandal.pdf';
 import { ClipLoader } from 'react-spinners';
 
 // === DYNAMIC DATA ===

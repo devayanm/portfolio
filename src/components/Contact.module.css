@@ -3,177 +3,306 @@
     --bg: #f4f9ff;
     --text: #0b1623;
     --muted: #5e6e7b;
-    --radius: 1rem;
+    --radius: 1.2rem;
     --shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-    --glass: rgba(255, 255, 255, 0.8);
+    --glass: rgba(255, 255, 255, 0.88);
 }
 
 .contactSection {
     background: var(--bg);
     padding: 5rem 2rem;
     padding-left: calc(100px + 2rem);
+    position: relative;
+    overflow: hidden;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+.gradientBg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(circle at 80% 20%, #0d6efd22 0%, transparent 70%),
+        radial-gradient(circle at 10% 90%, #00dfd822 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.7;
+    animation: gradientMove 10s infinite alternate;
 }
 
-.heading {
-    text-align: center;
-    font-size: 2.6rem;
-    margin-bottom: 3rem;
-    color: var(--text);
-    font-weight: 700;
+@keyframes gradientMove {
+    0% {
+        filter: blur(0px);
+    }
+
+    100% {
+        filter: blur(18px);
+    }
 }
 
 .contactGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    grid-template-columns: 340px 1fr;
     gap: 3rem;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
 }
 
-.contactInfo {
+.sidebar {
+    background: var(--glass);
+    backdrop-filter: blur(18px);
+    border-radius: 2rem;
+    box-shadow: 0 10px 32px #0d6efd22;
+    padding: 2.6rem 2rem 2rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: center;
+    position: sticky;
+    top: 2rem;
+    min-width: 280px;
+    max-width: 340px;
+    z-index: 2;
 }
 
-.infoCard {
+.avatarRing {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 1.2rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0d6efd 60%, #00dfd8 100%);
+    padding: 4px;
+    box-shadow: 0 0 24px #0d6efd33;
     display: flex;
     align-items: center;
-    gap: 1.2rem;
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    padding: 1.5rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s;
+    justify-content: center;
 }
 
-.infoCard:hover {
-    transform: translateY(-4px);
-}
-
-.iconWrapper {
-    width: 50px;
-    height: 50px;
-    background: var(--primary);
-    color: #fff;
+.avatar {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+}
+
+.status {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 17px;
+    height: 17px;
+    background: #16a34a;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #16a34a99;
+    animation: pulseStatus 1.6s infinite;
+}
+
+@keyframes pulseStatus {
+
+    0%,
+    100% {
+        box-shadow: 0 0 6px #16a34a99;
+    }
+
+    50% {
+        box-shadow: 0 0 14px #16a34a77;
+    }
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+    color: #0d1b2a;
+    letter-spacing: -0.01em;
+}
+
+.tagline {
+    font-size: 1.05rem;
+    color: #0d6efd;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    text-align: center;
+}
+
+.bio {
+    font-size: 0.98rem;
+    color: #444;
+    text-align: center;
+    margin-bottom: 1.1rem;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #0077b6;
+    font-size: 0.97rem;
+    margin-top: 0.3rem;
+    justify-content: center;
+}
+
+.socialRow {
+    display: flex;
+    gap: 1.1rem;
+    margin-bottom: 1.2rem;
+    justify-content: center;
+}
+
+.socialIcon {
+    color: #0d6efd;
+    background: #eaf2ff;
+    border-radius: 50%;
+    padding: 0.6rem;
+    font-size: 1.2rem;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px #0d6efd11;
     display: grid;
     place-items: center;
-    font-size: 1.2rem;
 }
 
-.infoCard h5 {
-    margin: 0;
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--text);
+.socialIcon:hover,
+.socialIcon:focus {
+    background: linear-gradient(90deg, #0d6efd, #00dfd8);
+    color: #fff;
+    transform: scale(1.13) translateY(-2px);
+    outline: none;
 }
 
-.infoCard p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--muted);
-}
-
-.form {
-    background: var(--glass);
-    backdrop-filter: blur(14px);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 2rem;
+/* --- Right: Single-Step Form --- */
+.advForm {
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 1.6rem;
+    box-shadow: 0 10px 32px #0d6efd15;
+    padding: 2.2rem 2rem 2rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    gap: 1.6rem;
+    position: relative;
+    min-width: 0;
+}
+
+.formHeading {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0d1b2a;
+    margin-bottom: 1.1rem;
+    text-align: center;
+    letter-spacing: -0.01em;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    margin-bottom: 1.2rem;
 }
 
 .formGroup label {
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: 700;
+    font-size: 1.08rem;
     color: var(--text);
+    margin-bottom: 0.2rem;
 }
 
-.inputIcon {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #eef4ff;
-    border-radius: var(--radius);
-    border: 1px solid #d2e3ff;
-    padding: 0.55rem 1rem;
-}
-
-.inputIcon input {
-    background: transparent;
-    border: none;
-    outline: none;
+.formGroup input,
+.formGroup textarea {
     width: 100%;
-    font-size: 0.95rem;
-    color: var(--text);
+    font-size: 1.08rem;
+    padding: 0.8rem 1.1rem;
+    border-radius: 1rem;
+    border: 1.5px solid #d2e3ff;
+    background: #eef4ff;
+    color: #0d1b2a;
+    outline: none;
+    transition: border 0.2s;
+    margin-top: 0.2rem;
 }
 
-textarea {
-    background: #eef4ff;
-    border: 1px solid #d2e3ff;
-    border-radius: var(--radius);
-    padding: 0.7rem 1rem;
-    font-size: 0.95rem;
-    resize: vertical;
-    color: var(--text);
+.formGroup input:focus,
+.formGroup textarea:focus {
+    border: 1.5px solid #0d6efd;
+}
+
+.inputError {
+    border: 1.5px solid #dc2626 !important;
+    background: #ffeaea;
+}
+
+.errorMsg {
+    color: #dc2626;
+    font-size: 0.97rem;
+    margin-top: 0.4rem;
 }
 
 .submitBtn {
     background: var(--primary);
     color: #fff;
     border: none;
-    font-size: 0.95rem;
-    padding: 0.75rem 1.6rem;
-    border-radius: var(--radius);
-    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 1.2rem;
+    font-weight: 700;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: background 0.3s ease, transform 0.2s ease;
-    align-self: flex-start;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 2px 10px #0d6efd22;
+    margin-top: 0.7rem;
 }
 
-.submitBtn:hover {
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
     background: #084cdf;
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.04);
 }
 
-.success {
-    color: green;
-    font-size: 0.95rem;
-    margin-top: 0.5rem;
+.successMsg {
+    color: #16a34a;
+    font-size: 1.18rem;
+    margin-top: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    justify-content: center;
 }
 
-.error {
-    color: red;
-    font-size: 0.95rem;
-    margin-top: 0.5rem;
-}
-
-/* Responsive */
 @media (max-width: 991px) {
     .contactSection {
         padding-left: 1rem;
         padding-right: 1rem;
     }
 
-    .heading {
-        font-size: 2.2rem;
+    .contactGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .sidebar {
+        position: static;
+        margin-bottom: 2rem;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .advForm,
+    .sidebar {
+        padding: 1.1rem;
+    }
+
+    .avatarRing {
+        width: 80px;
+        height: 80px;
+    }
+
+    .avatar {
+        width: 70px;
+        height: 70px;
     }
 }

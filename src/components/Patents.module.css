@@ -1,0 +1,178 @@
+:root {
+    --primary: #0d6efd;
+    --accent: #00dfd8;
+    --glass: rgba(255, 255, 255, 0.93);
+    --bg: #f4f9ff;
+    --text: #0d1b2a;
+    --muted: #5e6e7b;
+    --shadow: 0 8px 32px rgba(13, 110, 253, 0.08);
+    --radius: 2rem;
+}
+
+.patentsSection {
+    background: var(--bg);
+    min-height: 100vh;
+    padding: 6rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.gradientBg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(circle at 80% 20%, #0d6efd22 0%, transparent 70%),
+        radial-gradient(circle at 10% 90%, #00dfd822 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.8;
+    animation: gradientMove 10s infinite alternate;
+}
+
+@keyframes gradientMove {
+    0% {
+        filter: blur(0px);
+    }
+
+    100% {
+        filter: blur(18px);
+    }
+}
+
+.patentCard {
+    position: relative;
+    z-index: 2;
+    background: var(--glass);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 540px;
+    padding: 3.2rem 2.2rem 2.2rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    backdrop-filter: blur(18px);
+    border: 2.5px solid #eaf2ff;
+    animation: fadeIn 1s;
+}
+
+.ribbon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, #0d6efd 60%, #00dfd8 100%);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.5rem 1.5rem 0.5rem 1.1rem;
+    border-bottom-right-radius: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 8px #0d6efd33;
+    z-index: 2;
+}
+
+.iconWrap {
+    background: linear-gradient(135deg, #0d6efd22 60%, #00dfd822 100%);
+    border-radius: 50%;
+    padding: 1.4rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 24px #0d6efd22;
+    animation: floatIcon 3.5s infinite alternate;
+}
+
+@keyframes floatIcon {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 1.1rem;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+}
+
+.meta {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.number,
+.issued {
+    background: #eaf2ff;
+    color: #0d6efd;
+    border-radius: 1.2rem;
+    font-size: 0.98rem;
+    font-weight: 600;
+    padding: 0.3rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 2px 8px #0d6efd11;
+}
+
+.abstract {
+    color: #495057;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    margin-bottom: 2.1rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.seePatent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(90deg, #0d6efd 60%, #00dfd8 100%);
+    color: #fff;
+    font-size: 1.07rem;
+    font-weight: 700;
+    padding: 0.7rem 1.7rem;
+    border-radius: 1.3rem;
+    text-decoration: none;
+    box-shadow: 0 2px 12px #0d6efd22;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    margin-top: 0.2rem;
+}
+
+.seePatent:hover,
+.seePatent:focus {
+    background: linear-gradient(90deg, #00dfd8 60%, #0d6efd 100%);
+    color: #fff;
+    transform: scale(1.06) translateY(-2px);
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .patentCard {
+        padding: 1.3rem 0.7rem 1.2rem 0.7rem;
+        max-width: 98vw;
+    }
+
+    .title {
+        font-size: 1.08rem;
+    }
+
+    .abstract {
+        font-size: 0.97rem;
+    }
+}

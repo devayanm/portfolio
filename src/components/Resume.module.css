@@ -25,10 +25,9 @@
     margin: 0 auto;
 }
 
-/* === Header / Hero === */
 .hero {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
 }
 
 .name {
@@ -51,6 +50,24 @@
     flex-wrap: wrap;
     font-size: 0.95rem;
     color: #444;
+}
+
+.contactBadge {
+    background: #eaf2ff;
+    color: #0d6efd;
+    border-radius: 2rem;
+    padding: 0.4rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.contactBadge:hover {
+    background: var(--primary);
+    color: #fff;
 }
 
 .actions {
@@ -100,7 +117,30 @@
     transform: translateY(-2px);
 }
 
-/* === Layout Grid === */
+.skillsRow {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+}
+
+.skillBadge {
+    background: #eaf2ff;
+    color: #0d6efd;
+    border-radius: 1.2rem;
+    padding: 0.3rem 1rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    user-select: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.skillBadge:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
 .grid {
     display: flex;
     gap: 2rem;
@@ -113,7 +153,6 @@
     min-width: 320px;
 }
 
-/* === Cards === */
 .card {
     background: var(--card);
     border-radius: var(--radius);
@@ -124,8 +163,8 @@
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
 
 .card h2 {
@@ -137,38 +176,89 @@
     color: var(--primary);
 }
 
-.entry {
-    margin-bottom: 1.6rem;
+.timeline {
+    position: relative;
+    margin-left: 0.7rem;
+    padding-left: 1.2rem;
+    border-left: 2.5px solid #e2e8f0;
 }
 
-.entry h4 {
-    font-size: 1.05rem;
+.timelineItem {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.timelineDot {
+    position: absolute;
+    left: -1.2rem;
+    top: 0.5rem;
+    width: 13px;
+    height: 13px;
+    background: linear-gradient(135deg, #0d6efd 60%, #00dfd8 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px #0d6efd33;
+    border: 2px solid #fff;
+}
+
+.timelineItem h4 {
+    font-size: 1.07rem;
     font-weight: 600;
     color: var(--text);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
 }
 
 .roleMeta {
     display: flex;
     justify-content: space-between;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     font-weight: 600;
     color: var(--text);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
 }
 
-.entry p {
+.roleMeta p {
     font-size: 0.9rem;
     color: var(--muted);
-    line-height: 1.5;
+    font-weight: 400;
+    margin: 0.2rem 0 0 0;
+}
+
+.certList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.certList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.98rem;
+    margin-bottom: 0.7rem;
+    background: #f7faff;
+    border-radius: 1rem;
+    padding: 0.3rem 1rem;
+    font-weight: 600;
+}
+
+.certName {
+    color: #0d1b2a;
+}
+
+.certYear {
+    color: #0d6efd;
+    font-size: 0.92rem;
 }
 
 .sub {
     font-style: italic;
     margin-top: 0.3rem;
+    color: #0077b6;
 }
 
-/* === Modal === */
+/* Modal */
 .modalBackdrop {
     position: fixed;
     inset: 0;
@@ -214,11 +304,17 @@
     top: 10px;
     right: 5px;
     font-size: 2rem;
-    color: #fff;
+    color: #0d6efd;
     background: none;
     border: none;
     cursor: pointer;
     z-index: 2;
+    transition: color 0.2s;
+}
+
+.modalClose:hover {
+    color: #fff;
+    background: var(--primary);
 }
 
 .spinnerWrapper {
@@ -229,19 +325,18 @@
     background: #000;
 }
 
-@keyframes blink {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
+.errorMsg {
+    color: #d32f2f;
+    font-weight: 600;
+    text-align: center;
+    margin: 2rem 0;
 }
 
-/* === Animations === */
+.errorMsg a {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -264,7 +359,6 @@
     }
 }
 
-/* === Responsive === */
 @media (max-width: 1024px) {
     .resumeSection {
         padding-left: 2rem;

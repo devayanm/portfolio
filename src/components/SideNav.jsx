@@ -6,7 +6,8 @@ import {
     BarChart,
     Briefcase,
     Collection,
-    Envelope
+    Envelope,
+    Award
 } from 'react-bootstrap-icons';
 
 const navItems = [
@@ -14,6 +15,7 @@ const navItems = [
     { id: 'about', label: 'About', icon: <Person /> },
     { id: 'skills', label: 'Skills', icon: <BarChart /> },
     { id: 'projects', label: 'Projects', icon: <Collection /> },
+    { id: 'patents', label: 'Patents', icon: <Award /> },
     { id: 'resume', label: 'Resume', icon: <Briefcase /> },
     { id: 'contact', label: 'Contact', icon: <Envelope /> },
 ];

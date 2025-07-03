@@ -7,6 +7,7 @@
     --border-radius: 1.3rem;
     --shadow: 0 6px 30px rgba(13, 110, 253, 0.08);
     --glow: 0 0 12px rgba(13, 110, 253, 0.2);
+    --glass: rgba(255, 255, 255, 0.7);
 }
 
 .projectsSection {
@@ -15,6 +16,7 @@
     padding-left: calc(var(--sidebar-space) + 2rem);
     min-height: 100vh;
     box-sizing: border-box;
+    position: relative;
 }
 
 .heading {
@@ -22,15 +24,23 @@
     color: var(--text-dark);
     margin-bottom: 3rem;
     text-align: center;
+    letter-spacing: -0.01em;
+    font-weight: 800;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
 }
 
 .tabs {
-    position: relative;
     display: flex;
-    justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
-    margin-bottom: 2.5rem;
 }
 
 .tabBtn {
@@ -47,25 +57,25 @@
     z-index: 2;
 }
 
-.tabBtn:hover {
-    background: var(--primary);
-    color: #fff;
-}
-
+.tabBtn:hover,
 .activeTab {
     background: var(--primary);
     color: #fff;
     box-shadow: var(--glow);
 }
 
-.underline {
-    position: absolute;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 2px;
-    bottom: -5px;
-    left: 0;
-    transition: all 0.3s ease;
+.searchBar {
+    padding: 0.5rem 1.1rem;
+    border-radius: 2rem;
+    border: 1.5px solid #e2e8f0;
+    font-size: 1rem;
+    min-width: 180px;
+    transition: border 0.2s;
+    outline: none;
+}
+
+.searchBar:focus {
+    border: 1.5px solid var(--primary);
 }
 
 .cardGrid {
@@ -77,19 +87,21 @@
     margin: 0 auto;
     justify-content: center;
     justify-items: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(.4, 0, .2, 1);
 }
 
-/* Special case for 1 card */
-.cardGrid.single {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-wrap: wrap;
+.cardGrid.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.cardGrid.single .tiltCard {
-    max-width: 420px;
-    flex: 1 1 100%;
+.emptyMsg {
+    text-align: center;
+    color: #888;
+    font-size: 1.2rem;
+    grid-column: 1/-1;
 }
 
 .tiltCard {
@@ -98,13 +110,13 @@
     height: 100%;
 }
 
-/* Border Gradient Wrap */
 .cardWrapper {
     background: transparent;
     padding: 2px;
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
     height: 100%;
+    box-shadow: 0 0 0 transparent;
 }
 
 .cardWrapper:hover {
@@ -113,13 +125,20 @@
 }
 
 .projectCard {
-    background: var(--card-bg);
+    background: var(--glass);
     border-radius: var(--border-radius);
     height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    position: relative;
+}
+
+.projectCard:focus {
+    outline: 2px solid var(--primary);
 }
 
 .bannerWrapper {
@@ -188,6 +207,24 @@
     color: #fff;
 }
 
+.featuredBadge {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: linear-gradient(90deg, #0d6efd, #00dfd8);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 1.2rem;
+    padding: 0.3rem 0.9rem 0.3rem 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 2px 6px #0d6efd22;
+    z-index: 2;
+    letter-spacing: 0.01em;
+}
+
 .cardBody {
     padding: 1.5rem 1.5rem 1rem;
     flex-grow: 1;
@@ -200,6 +237,7 @@
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 0.5rem;
+    letter-spacing: 0.01em;
 }
 
 .projectDesc {
@@ -208,6 +246,145 @@
     line-height: 1.5;
     opacity: 0.95;
     flex-grow: 1;
+}
+
+.techRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.techBadge {
+    background: #eaf2ff;
+    color: #0d6efd;
+    padding: 0.3rem 0.9rem;
+    border-radius: 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    user-select: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.techBadge:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* Modal styles */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 110, 253, 0.09);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 48px #0d6efd33;
+    padding: 2.2rem 2rem 1.5rem 2rem;
+    min-width: 340px;
+    max-width: 96vw;
+    text-align: center;
+    position: relative;
+    animation: popIn 0.3s;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f2f6ff;
+    border: none;
+    border-radius: 50%;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #0d6efd;
+    transition: background 0.2s;
+    font-size: 1.3rem;
+}
+
+.closeBtn:hover {
+    background: #0d6efd;
+    color: #fff;
+}
+
+.modalBanner {
+    width: 100%;
+    max-width: 420px;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 1.2rem;
+    margin-bottom: 1.1rem;
+    box-shadow: 0 2px 16px #0d6efd11;
+}
+
+.modalDesc {
+    font-size: 1.03rem;
+    color: #495057;
+    margin: 1rem 0 1.1rem 0;
+}
+
+.modalTechRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-bottom: 1.1rem;
+}
+
+.modalLinks {
+    display: flex;
+    gap: 1.3rem;
+    justify-content: center;
+    margin-top: 1.2rem;
+}
+
+.modalLinks a {
+    background: #eaf2ff;
+    color: #0d6efd;
+    padding: 0.5rem 1.3rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+}
+
+.modalLinks a:hover {
+    background: var(--primary);
+    color: #fff;
 }
 
 @media (max-width: 768px) {
@@ -232,6 +409,11 @@
     .projectTitle {
         font-size: 1.1rem;
     }
+
+    .modal {
+        min-width: 220px;
+        padding: 1.1rem 0.7rem 1rem 0.7rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -245,5 +427,10 @@
 
     .cardGrid {
         grid-template-columns: 1fr;
+    }
+
+    .modalBanner {
+        max-width: 98vw;
+        max-height: 160px;
     }
 }

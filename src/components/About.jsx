@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { SiMongodb, SiSolidity, SiLinux, SiDocker } from "react-icons/si";
 
-// === DYNAMIC DATA ===
 const STATS = [
     { label: "Projects", value: 10, icon: <Rocket size={18} /> },
     { label: "Internships", value: 2, icon: <Briefcase size={18} /> },
@@ -44,21 +43,14 @@ const BADGES = [
     { label: "DevOps", icon: <Settings2 size={16} /> },
 ];
 
-// === COMPONENT ===
 export default function About() {
-    // Badge filter state
     const [filter, setFilter] = useState(null);
-
-    // Animated stats
     const [statsInView, setStatsInView] = useState(false);
     const statsRef = useRef();
-
-    // Timeline animation
     const [timelineInView, setTimelineInView] = useState(false);
     const timelineRef = useRef();
-
-    // Profile 3D tilt
     const profileRef = useRef();
+
     useEffect(() => {
         const node = profileRef.current;
         if (!node) return;
@@ -89,7 +81,6 @@ export default function About() {
         };
     }, []);
 
-    // Intersection Observer for stats and timeline
     useEffect(() => {
         const observer = new window.IntersectionObserver(
             (entries) => {
@@ -105,7 +96,6 @@ export default function About() {
         return () => observer.disconnect();
     }, []);
 
-    // Filtered data
     const filteredRoles = filter
         ? ROLES.filter((r) => r.tech.includes(filter))
         : ROLES;
@@ -113,7 +103,6 @@ export default function About() {
         ? PROJECTS.filter((p) => p.tech.includes(filter))
         : PROJECTS;
 
-    // Animated count-up for stats
     const useCountUp = (end, inView, duration = 1200) => {
         const [count, setCount] = useState(0);
         useEffect(() => {
@@ -121,7 +110,6 @@ export default function About() {
                 setCount(end);
                 return;
             }
-            let start = 0;
             let frame;
             const startTime = performance.now();
             const step = (now) => {
@@ -140,10 +128,22 @@ export default function About() {
         <section id="about" className={styles.aboutSection}>
             <div className={styles.gradientBg}></div>
             <div className={styles.container}>
-                {/* Profile Overview */}
+                {/* Profile Card */}
                 <div className={styles.profileCard} ref={profileRef} tabIndex={0}>
-                    <div className={styles.glow}></div>
-                    <img src={profile} alt="Devayan Mandal" className={styles.avatar} />
+                    <div className={styles.profileBg}></div>
+                    <div className={styles.avatarWrapper}>
+                        <img src={profile} alt="Devayan Mandal" className={styles.avatar} />
+                        <div className={styles.avatarGlow}></div>
+                        <div className={`${styles.floatingIcon} ${styles.floatingIcon1}`}>
+                            <Rocket size={24} color="#0d6efd" />
+                        </div>
+                        <div className={`${styles.floatingIcon} ${styles.floatingIcon2}`}>
+                            <SiDocker size={20} color="#00dfd8" />
+                        </div>
+                        <div className={`${styles.floatingIcon} ${styles.floatingIcon3}`}>
+                            <SiSolidity size={20} color="#222" />
+                        </div>
+                    </div>
                     <h4 className={styles.name}>Devayan Mandal</h4>
                     <p className={styles.role}>Full Stack & Blockchain Developer</p>
                     <div className={styles.stats} ref={statsRef}>
@@ -157,9 +157,30 @@ export default function About() {
                             </div>
                         ))}
                     </div>
+                    <hr />
+                    <div className={styles.profileBio}>
+                        Passionate about building robust, scalable web apps, secure systems, and decentralized solutions. Always learning, always shipping!
+                    </div>
+                    <div className={styles.badgeCloud}>
+                        {BADGES.map((badge) => (
+                            <button
+                                key={badge.label}
+                                className={`${styles.techBadge} ${filter === badge.label ? styles.activeBadge : ""}`}
+                                onClick={() => setFilter(filter === badge.label ? null : badge.label)}
+                                aria-pressed={filter === badge.label}
+                            >
+                                {badge.icon} {badge.label}
+                            </button>
+                        ))}
+                        {filter && (
+                            <button className={styles.clearFilter} onClick={() => setFilter(null)}>
+                                Clear Filter ✕
+                            </button>
+                        )}
+                    </div>
                 </div>
 
-                {/* Career Timeline */}
+                {/* Timeline/Text Area */}
                 <div className={styles.textArea} ref={timelineRef}>
                     <h2 className={styles.heading}>My Journey</h2>
                     <p className={styles.intro}>
@@ -200,23 +221,6 @@ export default function About() {
                                 </div>
                             </div>
                         ))}
-                    </div>
-                    <div className={styles.badgeRow}>
-                        {BADGES.map((badge) => (
-                            <button
-                                key={badge.label}
-                                className={`${styles.techBadge} ${filter === badge.label ? styles.activeBadge : ""}`}
-                                onClick={() => setFilter(filter === badge.label ? null : badge.label)}
-                                aria-pressed={filter === badge.label}
-                            >
-                                {badge.icon} {badge.label}
-                            </button>
-                        ))}
-                        {filter && (
-                            <button className={styles.clearFilter} onClick={() => setFilter(null)}>
-                                Clear Filter ✕
-                            </button>
-                        )}
                     </div>
                 </div>
             </div>

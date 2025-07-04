@@ -5,10 +5,10 @@ import {
     FaGraduationCap, FaUserFriends, FaLinkedin, FaGithub, FaGlobe
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-const resume = '/Resume_Devayan_Mandal.pdf';
 import { ClipLoader } from 'react-spinners';
 
-// === DYNAMIC DATA ===
+const resume = '/Resume_Devayan_Mandal.pdf';
+
 const CONTACTS = [
     { icon: <FaMapMarkerAlt />, text: "Kolkata, IN" },
     { icon: <FaEnvelope />, text: "devayan9689@gmail.com", link: "mailto:devayan9689@gmail.com" },
@@ -96,8 +96,14 @@ export default function Resume() {
         document.body.removeChild(link);
     };
 
+    // Google Docs Viewer fallback for production (universal PDF preview)
+    const pdfUrl = typeof window !== "undefined" && window.location.hostname !== "localhost"
+        ? `https://docs.google.com/gview?url=${window.location.origin}${resume}&embedded=true`
+        : resume;
+
     return (
         <section id="resume" className={styles.resumeSection}>
+            <h2 className={styles.sectionHeading}>Resume</h2>
             <div className={styles.container}>
                 {/* Header */}
                 <motion.div
@@ -155,7 +161,7 @@ export default function Resume() {
                                 </div>
                             )}
                             <iframe
-                                src={resume}
+                                src={pdfUrl}
                                 title="Resume Preview"
                                 className={styles.resumeIframe}
                                 onLoad={() => setIframeLoaded(true)}
@@ -176,7 +182,7 @@ export default function Resume() {
                         transition={{ duration: 0.6 }}
                     >
                         <div className={styles.card}>
-                            <h2><FaBriefcase /> Work Experience</h2>
+                            <h3><FaBriefcase /> Work Experience</h3>
                             <div className={styles.timeline}>
                                 {WORK.map((job, i) => (
                                     <div key={i} className={styles.timelineItem}>
@@ -196,7 +202,7 @@ export default function Resume() {
                             </div>
                         </div>
                         <div className={styles.card}>
-                            <h2><FaUserFriends /> Volunteering</h2>
+                            <h3><FaUserFriends /> Volunteering</h3>
                             <div className={styles.timeline}>
                                 {VOLUNTEER.map((v, i) => (
                                     <div key={i} className={styles.timelineItem}>
@@ -224,7 +230,7 @@ export default function Resume() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
                         <div className={styles.card}>
-                            <h2><FaGraduationCap /> Education</h2>
+                            <h3><FaGraduationCap /> Education</h3>
                             <div className={styles.timeline}>
                                 {EDUCATION.map((edu, i) => (
                                     <div key={i} className={styles.timelineItem}>

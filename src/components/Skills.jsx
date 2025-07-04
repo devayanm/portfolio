@@ -59,7 +59,6 @@ const SKILL_CATEGORIES = [
 
 export default function Skills() {
     const [activeTab, setActiveTab] = useState(SKILL_CATEGORIES[0].name);
-    const [modalSkill, setModalSkill] = useState(null);
     const sectionRef = useRef(null);
 
     // Animate section on scroll
@@ -79,38 +78,45 @@ export default function Skills() {
         return () => observer.disconnect();
     }, []);
 
-    // 3D tilt effect for cards
+    // 3D tilt effect for cards (on hover/focus only)
     useEffect(() => {
         const cards = document.querySelectorAll(`.${styles.skillCard}`);
         cards.forEach(card => {
             const handleMove = e => {
                 const rect = card.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width - 0.5) * 16;
-                const y = ((e.clientY - rect.top) / rect.height - 0.5) * 16;
-                card.style.transform = `rotateY(${-x}deg) rotateX(${y}deg) scale(1.04)`;
+                const x = ((e.clientX - rect.left) / rect.width - 0.5) * 18;
+                const y = ((e.clientY - rect.top) / rect.height - 0.5) * 14;
+                card.style.transform = `scale(1.07) rotateY(${-x}deg) rotateX(${y}deg)`;
             };
             const handleLeave = () => {
                 card.style.transform = "";
             };
             card.addEventListener("mousemove", handleMove);
             card.addEventListener("mouseleave", handleLeave);
+            card.addEventListener("focus", handleLeave); // reset on focus for keyboard users
+            card.addEventListener("blur", handleLeave);
+            // Clean up
             return () => {
                 card.removeEventListener("mousemove", handleMove);
                 card.removeEventListener("mouseleave", handleLeave);
+                card.removeEventListener("focus", handleLeave);
+                card.removeEventListener("blur", handleLeave);
             };
         });
     }, [activeTab]);
 
-    // Modal close on Escape
+    // Animate progress bar on mount
     useEffect(() => {
-        const handleKey = e => {
-            if (e.key === "Escape") setModalSkill(null);
-        };
-        if (modalSkill) window.addEventListener("keydown", handleKey);
-        return () => window.removeEventListener("keydown", handleKey);
-    }, [modalSkill]);
+        const bars = document.querySelectorAll(`.${styles.progress}`);
+        bars.forEach(bar => {
+            bar.style.strokeDasharray = "0,100";
+            setTimeout(() => {
+                const dash = bar.getAttribute("data-dash");
+                bar.style.strokeDasharray = `${dash},100`;
+            }, 150);
+        });
+    }, [activeTab]);
 
-    // AI Suggestion Placeholder (for future AI features)
     const aiSuggestion = (
         <div className={styles.aiSuggestion}>
             <Sparkles size={18} />
@@ -141,13 +147,11 @@ export default function Skills() {
                 {SKILL_CATEGORIES.filter(cat => cat.name === activeTab).map((group, i) => (
                     <div key={i} className={styles.cardGrid} id={`panel-${group.name}`} role="tabpanel">
                         {group.items.map((skill, idx) => (
-                            <button
+                            <div
                                 key={idx}
                                 className={styles.skillCard}
                                 tabIndex={0}
-                                style={{ "--level": skill.level }}
-                                aria-label={`View details for ${skill.name}`}
-                                onClick={() => setModalSkill(skill)}
+                                aria-label={`Show details for ${skill.name}`}
                             >
                                 <div className={styles.circularProgress}>
                                     <svg viewBox="0 0 36 36" className={styles.circularSvg}>
@@ -159,6 +163,7 @@ export default function Skills() {
                                         />
                                         <path
                                             className={styles.progress}
+                                            data-dash={skill.level}
                                             strokeDasharray={`${skill.level}, 100`}
                                             d="M18 2.0845
                         a 15.9155 15.9155 0 0 1 0 31.831
@@ -169,32 +174,15 @@ export default function Skills() {
                                 </div>
                                 <p className={styles.skillName}>{skill.name}</p>
                                 <p className={styles.levelText}>{skill.level}%</p>
-                            </button>
+                                <div className={styles.skillDetails}>
+                                    <div><b>Description:</b> {skill.desc}</div>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 ))}
             </div>
             {aiSuggestion}
-            {/* Modal for skill details */}
-            {modalSkill && (
-                <div className={styles.modalOverlay} onClick={() => setModalSkill(null)} tabIndex={-1}>
-                    <div className={styles.modal} onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
-                        <button className={styles.closeBtn} onClick={() => setModalSkill(null)} aria-label="Close">
-                            ×
-                        </button>
-                        <div className={styles.modalIcon}>{modalSkill.icon}</div>
-                        <h3>{modalSkill.name}</h3>
-                        <div className={styles.modalLevel}>
-                            <span>Proficiency:</span>
-                            <span>{modalSkill.level}%</span>
-                        </div>
-                        <p className={styles.modalDesc}>{modalSkill.desc}</p>
-                        <div className={styles.modalFooter}>
-                            <span>Want to level up? <a href="https://roadmap.sh" target="_blank" rel="noopener noreferrer">See learning paths</a></span>
-                        </div>
-                    </div>
-                </div>
-            )}
         </section>
     );
 }

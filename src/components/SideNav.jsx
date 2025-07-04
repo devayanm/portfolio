@@ -39,17 +39,15 @@ export default function SideNav() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Smooth scroll with offset (adjust offset as needed)
     const scrollToSection = (id) => {
         const el = document.getElementById(id);
         if (el) {
-            const yOffset = -80; // offset for fixed header height
+            const yOffset = -80;
             const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
     };
 
-    // Keyboard navigation (Arrow keys)
     const handleKeyDown = (e, idx, id) => {
         if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
             e.preventDefault();
@@ -77,7 +75,11 @@ export default function SideNav() {
                     type="button"
                 >
                     <span className={styles.icon}>{item.icon}</span>
-                    <span className={styles.label}>{item.label}</span>
+                    {/* Visually hidden label for accessibility on mobile */}
+                    <span className={styles.label}>
+                        {item.label}
+                    </span>
+                    <span className={styles.srOnly}>{item.label}</span>
                 </button>
             ))}
         </nav>
